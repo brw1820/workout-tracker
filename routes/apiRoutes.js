@@ -14,14 +14,19 @@ app.get("/api/workouts", function (req, res) {
     });
 
     app.post("/api/workouts", (req, res) => {
-      db.Workout.create({})
-        .then(dbWorkout => {
-          res.json(dbWorkout);
-        })
-        .catch(err => {
-          res.status(400).json(err);
-        });
-    });
+    
+      Workout.create(req.body).then(createdWorkout => {
+          res.json(createdWorkout)
+      }).catch(err => {
+          console.log(err);
+          res.json({
+              error: true,
+              data: null,
+              message: "Unable to create new workout."
+          })
+      })
+  })
+  
 
 router.put("/api/workouts/:id", (req, res) => {
   const id = req.params.id;
