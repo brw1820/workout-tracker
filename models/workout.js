@@ -13,7 +13,9 @@ const workoutSchema = new Schema(
         type: {
           type: String,
           trim: true,
-          required: "Enter an exercise type"
+          enum: ["resistance", "cardio"],
+          required: "Enter an exercise type",
+          allowNull: false
         },
         name: {
           type: String,
@@ -21,20 +23,25 @@ const workoutSchema = new Schema(
           required: "Enter an exercise name"
         },
         weight: {
-          type: Number
+          type: Number,
+          allowNull: false
         },
         reps: {
-          type: Number
+          type: Number,
+          allowNull: true
         },
         sets: {
-          type: Number
+          type: Number,
+          allowNull: true
         },
         duration: {
           type: Number,
-          required: "Enter an exercise duration in minutes"
+          required: "Enter an exercise duration in minutes",
+          allowNull: true
         },
         distance: {
-          type: Number
+          type: Number,
+          allowNull: true
         }
       }
     ]
