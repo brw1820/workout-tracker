@@ -1,41 +1,46 @@
-const path = require("path");
-const db = require("../models/workout.js")
+const db = require("../models");
 
-module.exports = function (app) {
+module.exports = function(app) {
 
-app.get("/api/workouts", function (req, res) {
+app.get("/api/workouts", (req, res) => {
     db.Workout.find({})
-    .then(data => {
-      res.json(data)
-  })
-    .catch(err => {
-      res.json(err)
-  })
-    });
-  
-    app.get("/api/config", (req, res) => {
-      Workout.find({}).then((foundWorkouts) => {
-          res.json({
-              success: true,
-              data: foundWorkouts,
-          });
-      });
-  });
+    .then((dbWorkouts) => {
+        res.json(dbWorkouts);
+    }).catch(err => {
+      console.log(err);
+      res.status(500);
+});
+});
 
-  app.post("/api/workouts", function(req,res)  {
-  Workout.create(req.body).then(createdWorkout => {
-    res.json({
-        error: false,
-        data: createdWorkout,
-        message: "Successfully created new workout.",
-    })
-  });
-}).catch(err => {
-    console.log(err);
-    res.json({
-        error: true,
-        data: null,
-        message: "Unable to create new workout."
-    })
-})
-}
+app.get("/api/workouts/range", (req, res) => {
+    db.Workout.find({})
+    .limit(7)
+    .then((dbWorkouts) => {
+        res.json(dbWorkouts);
+        console.log(dbWorkouts);
+    });
+});
+
+app.put("/api/workouts/:id", (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    console.log(req.body);
+    db.Workout.findByIdAndUpdate(id, {$push: {"exercises": req.body}},{ new: true }).then((dbWorkouts) => {
+        res.json(dbWorkouts);
+    });
+});
+
+app.post("/api/workouts", (req, res) => {  
+    db.Workout.create(req.body).then(dbWorkouts => {
+        res.json(dbWorkouts);
+        console.log(dbWorkouts, "Successfully created workout");
+    }).catch(err => {
+        console.log(err);
+        res.json({
+            error: true,
+            data: null,
+            message: "Workout Failed."
+        });
+    });
+});
+};

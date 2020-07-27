@@ -1,4 +1,4 @@
-var path = require("path");
+const path = require("path");
 
 module.exports = function(app) {
 app.get("/exercise", function(req,res)  {
@@ -10,6 +10,6 @@ app.get("/", function(req,res) {
 });
 
 app.get("/stats", function(req,res) {
-    res.sendFile(path.join(__dirname, "..public/stats.html"))
+    res.sendFile(path.join(__dirname, "../public/stats.html"))
 });
 }
