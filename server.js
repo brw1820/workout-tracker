@@ -13,7 +13,7 @@ app.use(express.static("public"));
 require("./routes/htmlRoutes.js")(app);
 require("./routes/apiRoutes.js")(app);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true, useFindAndModify: false });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true, useFindAndModify: false,  useUnifiedTopology: true });
 
 const connection = mongoose.connection;
 
