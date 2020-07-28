@@ -19,9 +19,9 @@ Resources such as iTerm and Visual Source Code will also be needed to run the co
   ## Usage
 [Heroku Link for Deployed Application](https://exercise-tracker-homework.herokuapp.com/)
   
- ![example](./Assets/fitness1.PNG)
- ![example](./Assets/fitness2.PNG)
- ![example](./Assets/fitness3.PNG)
+ ![example](./public/Assets/fitness1.PNG)
+ ![example](./public/Assets/fitness2.PNG)
+ ![example](./public/Assets/fitness3.PNG)
 
 ## Contributing
 This was a solo effort as a project for the Georgia Tech Full-Stack Web Development Program.  
